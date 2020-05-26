@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="../../../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+<!--  组件使用，把组件名写成html标签，如<my-com></my-com>或 <mycom></mycom>-->
+  <mycom1></mycom1>
+  <mycom2></mycom2>
+  <mycom3></mycom3>
+  <mycom4></mycom4>
+</div>
+<div id="app2">
+  <login></login>
+</div>
+<template id="temp1">
+  <h3>com4 使用指定的template 的 ID 创建的组件</h3>
+</template>
+<script type="text/javascript">
+  // 1.1 Vue.extend 创建全局Vue组件
+  let com1 = Vue.extend({
+    // 1.template 指定组件展示的html结构
+    // 2.template 中只能有一个根元素，不能有并排元素，例：<h3></h3><h2></h2>
+    template: '<h3>com1 使用Vue.extend创建的组件</h3>'
+  })
+
+  // 1.2 Vue.component('组件的名称'， 创建的模板对象)
+  // 组件名称可以驼峰命名但使用的使用要用-，例：<my-com></my-com>
+  Vue.component('mycom1', com1)
+
+  // 简写
+  Vue.component('mycom2', Vue.extend({
+    template: '<h3>com2 简写：使用Vue.extend创建的组件</h3>'
+  }))
+
+  // 再简写
+  Vue.component('mycom3', {
+    template: '<h3>com3 再简写： 使用Vue.extend创建的组件</h3>'
+  })
+
+  Vue.component('mycom4', {
+    // 通过模板指定模板id
+    template: '#temp1'
+  })
+
+  // 创建Vue实例
+  var vm = new Vue({
+    el: '#app',
+    data: {},
+    methods: {}
+  })
+
+  var vm2 = new Vue({
+    el:'#app2',
+    data: {
+
+    },
+    methods: {
+
+    },
+    // 私有组件
+    components: {
+      // 相当于 "login"(组件名): login{}（组件函数）
+      login:{
+        template: '<h1>私有组件 ：login</h1>>'
+      }
+    }
+  })
+
+</script>
+</body>
+
+
+</html>

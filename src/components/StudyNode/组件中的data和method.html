@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="../../../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  {{str}}
+  <datacom></datacom>
+  <parentscom></parentscom>
+</div>
+</body>
+<script type="text/javascript">
+  let viewmodel = new Vue({
+    el: '#app',
+    data: {
+      str : 'hello world!'
+    },
+    components: {
+
+    }
+  })
+
+  Vue.component('childcom',{
+    template: '<h2>这是一个子组件</h2>'
+  })
+
+  Vue.component('parentscom',{
+    template:'<h2>这是一个父组件<childcom></childcom></h2>',
+    components: {
+      childcom
+    }
+  })
+  Vue.component('datacom', {
+    template:'<h1>msg : {{msg}}</h1>',
+    // 组件data必须是一个函数，且有返回值为对象，已确保data是私有对象而不是公共对象
+    // 实例data可以是对象
+    data : function () {
+      return{
+        msg : 'hello World'
+      }
+    },
+    components: {
+
+    }
+  })
+</script>
+</html>
